@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  db: 
+    image: postgres:9.5
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret123
+  web:
+    image: mayracabrera10/my_app:latest
+    ports:
+      - 3000:3000
+    working_dir: /usr/src/my_app
+    tty: true
+    stdin_open: true
+    links:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:secret123@db:5432/my_app_development
