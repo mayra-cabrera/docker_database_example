@@ -20,3 +20,5 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://postgres:secret123@db:5432/my_app_development
+    env_file:
+      - development.env
